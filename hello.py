@@ -8,5 +8,5 @@ def hello():
     return 'Hello World! ...???'
 
 @myapp.route("/test")
-def hello():
+def test():
     return 'Robert test'
