@@ -13,10 +13,10 @@ else:
     mainpath = '/aidata/DIPS'
     ip = ''
 
-@myapp.before_request
-def make_session_permanent():
-    session.permanent = True
-    myapp.permanent_session_lifetime = dt.timedelta(minutes=3)
+# @myapp.before_request
+# def make_session_permanent():
+#     session.permanent = True
+#     myapp.permanent_session_lifetime = dt.timedelta(minutes=3)
 
 @myapp.route("/")
 def hello():
