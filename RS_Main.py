@@ -1,7 +1,7 @@
 from flask import Flask
-from flask import abort
+from flask import abort, session
 
-import os
+import os, datetime as dt
 import Opt_func
 import Opt_RS_Func
 
@@ -13,6 +13,10 @@ else:
     mainpath = '/aidata/DIPS'
     ip = ''
 
+@myapp.before_request
+def make_session_permanent():
+    session.permanent = True
+    myapp.permanent_session_lifetime = dt.timedelta(minutes=3)
 
 @myapp.route("/")
 def hello():
