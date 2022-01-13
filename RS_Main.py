@@ -1,7 +1,7 @@
 from flask import Flask
-from flask import abort, session
+from flask import abort  #, session
 
-import os, datetime as dt
+import os  #, datetime as dt
 import Opt_func
 import Opt_RS_Func
 
@@ -33,3 +33,11 @@ def RS_Evaluate(taskname):
             if ret1 > 205: ret = ret1
     if ret > 205: abort(ret)
     return '', ret
+
+@myapp.route('/RS/v0.1/<string:taskname>/<string:stagename>/<string:resultname>',  methods = ['GET'])
+def RS_Download_PSRReport(taskname, stagename, resultname):
+    sfile = resultname + '.xlsx'
+    spath = os.path.join(os.path.join(mainpath, taskname), stagename)
+    if not os.path.isfile(os.path.join(spath,  sfile)): abort(404)
+    result = Opt_func.Download_EXCELFile(spath, sfile)
+    return result
